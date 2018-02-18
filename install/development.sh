@@ -1,5 +1,7 @@
+#!/usr/bin/env bash
+
 sudo apt-get update
-sudo apt-get install vim git python python-setuptools python-dev build-essential golang -y
+sudo apt-get install trash-cli vim git python python-setuptools python-dev build-essential golang -y
 sudo apt-get upgrade -y
 sudo apt-get dist-upgrade -y
 
@@ -32,22 +34,12 @@ if [ -z `ssh-keygen -F github.com` ]; then
   ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 fi
 
-
-# 1. Add the Spotify repository signing keys to be able to verify downloaded packages
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886 0DF731E45CE24F27EEEB1450EFDC8610341D9410
-
-# 2. Add the Spotify repository
-echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
-
-# 3. Update list of available packages
-sudo apt-get update
-
-# 4. Install Spotify
-sudo apt-get install spotify-client
-
 # Install Sublime Text 3
+which subl || {
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
 sudo apt-get install apt-transport-https -y
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
 sudo apt-get update
 sudo apt-get install sublime-text -y
+}
+
